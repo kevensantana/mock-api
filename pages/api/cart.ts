@@ -1,7 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { corsMiddleware } from '../../lib/cors/middleware';
 import { readDb } from '../../lib/readDb';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  await corsMiddleware(req, res, ['https://participeai-p0if84cmf-kevensantanas-projects.vercel.app']);
+
   try {
     const data = await readDb();
 
