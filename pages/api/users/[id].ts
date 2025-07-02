@@ -6,10 +6,8 @@ import type { User } from '../../../types';
 let users: User[] = [];
 
 async function loadUsers() {
-  if (users.length === 0) {
-    const data = await readDb();
-    users = data.users;
-  }
+  const data = await readDb(); 
+  users = data.users;
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
