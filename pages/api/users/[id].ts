@@ -13,7 +13,11 @@ async function loadUsers() {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  await corsMiddleware(req, res, ['https://participeai-p0if84cmf-kevensantanas-projects.vercel.app']);
+ await corsMiddleware(req, res, ['https://participeai.vercel.app']);
+  if (req.method !== 'GET' && req.method !== 'PUT' && req.method !== 'DELETE') {
+    res.setHeader('Allow', ['GET', 'PUT', 'DELETE']);
+    return res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
 
   await loadUsers();
 
